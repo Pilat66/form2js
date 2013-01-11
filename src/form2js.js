@@ -267,7 +267,7 @@ var form2js = (function()
 	function getFieldValue(fieldNode)
 	{
 		if (fieldNode.disabled) return null;
-		
+		var checkbox_unchecked_value=undefined; // what returns if checkbox does not checked
 		switch (fieldNode.nodeName) {
 			case 'INPUT':
 			case 'TEXTAREA':
@@ -277,6 +277,9 @@ var form2js = (function()
                         if (fieldNode.checked && fieldNode.value === "true") return true;
                         if (!fieldNode.checked && fieldNode.value === "true") return false;
 						if (fieldNode.checked) return fieldNode.value;
+						// new checkbox attribute - value for unchecked checkbox
+						if(fieldNode.unchecked_value) return fieldNode.unchecked_value;
+						return checkbox_unchecked_value;
 						break;
 
 					case 'button':
